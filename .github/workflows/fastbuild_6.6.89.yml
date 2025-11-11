@@ -430,8 +430,6 @@ jobs:
             echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./common/arch/arm64/configs/gki_defconfig
             # Add rcu config setting
             echo "CONFIG_RCU_TRACE=n" >> ./common/arch/arm64/configs/gki_defconfig                 
-            # ===== 硬件安全引擎=====
-            echo "CONFIG_CRYPTO_DEV_QCOM_RNG=y" >> ./common/arch/arm64/configs/gki_defconfig 
             cd common
             wget https://github.com/cctv18/oppo_oplus_realme_sm8750/raw/refs/heads/main/other_patch/config.patch
             patch -p1 -F 3 < config.patch || true
@@ -466,6 +464,7 @@ jobs:
             cd kernel_workspace
             echo "CONFIG_MQ_IOSCHED_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_MQ_IOSCHED_DEFAULT_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
+            echo "CONFIG_SCHED_EEVDF=y" >> ./common/arch/arm64/configs/gki_defconfig
           fi
 
       - name: 启用Re-Kernel支持
@@ -474,15 +473,7 @@ jobs:
             echo "正在启用Re-Kernel支持(用于与Freezer,NoActive等软件配合使用,提升冻结后台能力)…"
             cd kernel_workspace
             echo "CONFIG_REKERNEL=y" >> ./common/arch/arm64/configs/gki_defconfig
-          fi
-      - name: 启用 EEVDF 调度器
-        run: |
-          if [[ "${{ github.event.inputs.adios_rekernel_enable }}" == "true" ]]; then
-            echo "正在启用EEVDF支持"
-            cd kernel_workspace
-            echo "CONFIG_SCHED_EEVDF=y" >> ./common/arch/arm64/configs/gki_defconfig
-          fi
-          
+          fi          
       - name: 启用内核级基带保护
         run: |
           if [[ "${{ github.event.inputs.baseband_guard }}" == "true" ]]; then
