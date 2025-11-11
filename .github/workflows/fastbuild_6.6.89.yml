@@ -536,6 +536,7 @@ jobs:
             cd kernel_workspace
             echo "CONFIG_SCHED_EEVDF=y" >> ./common/arch/arm64/configs/gki_defconfig
           fi
+          
       - name: 启用内核级基带保护
         run: |
           if [[ "${{ github.event.inputs.baseband_guard }}" == "true" ]]; then
