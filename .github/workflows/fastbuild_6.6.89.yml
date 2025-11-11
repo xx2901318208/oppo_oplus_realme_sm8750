@@ -71,6 +71,15 @@ on:
           - '1'
           - '2'
           - '3'
+      SCHED_EEVDF:
+        description: "是否启用SCHED_EEVDF算法(false关闭,true仅加入算法,default设为默认6.6内核可用)"
+        required: true
+        type: choice
+        default: 'true'
+        options:
+          - 'false'
+          - 'true'
+          - 'default'
       baseband_guard:
         description: '是否开启内核级基带保护(阻止一切对非用户分区的写入，有效防止格机)'
         required: true
