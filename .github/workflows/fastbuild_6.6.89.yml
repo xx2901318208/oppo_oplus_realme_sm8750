@@ -501,6 +501,8 @@ jobs:
             # 添加 FQ_CODEL 相关配置项
             echo "CONFIG_NET_SCH_FQ_CODEL=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_DEFAULT_NET_SCH=fq_codel" >> ./common/arch/arm64/configs/gki_defconfig
+            # 启用网络功能增强优化配置
+            echo "CONFIG_WIREGUARD=y" >> ./common/arch/arm64/configs/gki_defconfig
             if [[ "${{ github.event.inputs.bbr_enable }}" == "default" ]]; then
               echo "正在将BBR设为默认拥塞控制算法..."
               echo "CONFIG_DEFAULT_TCP_CONG=bbr" >> ./common/arch/arm64/configs/gki_defconfig
@@ -516,7 +518,6 @@ jobs:
             cd kernel_workspace
             echo "CONFIG_MQ_IOSCHED_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_MQ_IOSCHED_DEFAULT_ADIOS=y" >> ./common/arch/arm64/configs/gki_defconfig
-            echo "CONFIG_SCHED_EEVDF=y" >> ./common/arch/arm64/configs/gki_defconfig
           fi
 
       - name: 启用Re-Kernel支持
