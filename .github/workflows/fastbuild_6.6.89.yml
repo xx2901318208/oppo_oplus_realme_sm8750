@@ -499,7 +499,7 @@ jobs:
           echo "CONFIG_ARM_TRUSTZONE=y" >> ./common/arch/arm64/configs/gki_defconfig                 
           # ===== 硬件安全引擎=====
           echo "CONFIG_CRYPTO_DEV_QCOM_RNG=y" >> ./common/arch/arm64/configs/gki_defconfig 
-          sed -i 's/CONFIG_CRYPTO_AES_ARM64_CE=.*/CONFIG_CRYPTO_AES_ARM64_CE=y/' ./common/arch/arm64/con
+          sed -i 's/CONFIG_CRYPTO_AES_ARM64_CE=.*/CONFIG_CRYPTO_AES_ARM64_CE=y/' ./common/arch/arm64/configs/gki_defconfig
           #由于部分机型的vintf兼容性检测规则，在开启CONFIG_IP6_NF_NAT后开机会出现"您的设备内部出现了问题。请联系您的设备制造商了解详情。"的提示，故添加一个配置修复补丁，在编译内核时隐藏CONFIG_IP6_NF_NAT=y但不影响对应功能编译
           cd common
           wget https://github.com/cctv18/oppo_oplus_realme_sm8750/raw/refs/heads/main/other_patch/config.patch
